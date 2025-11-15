@@ -1,3 +1,4 @@
+
 class Note:
     def __init__(self, student, disciplina, nota_stud):
         self.__student = student
