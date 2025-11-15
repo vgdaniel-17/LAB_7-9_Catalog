@@ -1,4 +1,4 @@
-from domain.dis import Discipline
+from domain.disciplina import Discipline
 
 class RepoDiscipline:
     def __init__(self):

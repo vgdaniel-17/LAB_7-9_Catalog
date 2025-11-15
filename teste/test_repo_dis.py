@@ -1,5 +1,5 @@
 import unittest
-from domain.dis import *
+from domain.disciplina import *
 from repository.repository_discipline import *
 
 
