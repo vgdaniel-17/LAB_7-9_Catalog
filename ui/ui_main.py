@@ -65,7 +65,7 @@ class Console:
 
     def ui_afisare(self):
         return self.__service_studenti.get_all_studenti()
-
+    
 #
 # ui = Console(srv_studenti, srv_discipline, srv_note)
 # ui.run()
