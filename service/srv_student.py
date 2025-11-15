@@ -20,3 +20,6 @@ class service_student:
 
     def cauta_stundent(self, id_student):
         return self.__validator.cauta_stundent(id_student)
+
+    def get_all_studenti(self):
+        return self.__repo.get_all_studenti()

@@ -1,10 +1,7 @@
-# from domain.dis import Discipline
-# from repository.repository_discipline import RepoDiscipline
-#
-# repo = RepoDiscipline()
-#
-# repo.addDiscipline(Discipline(3123, "mate", "mihii"))
-#
-# for discipline in repo.getAllDiscipline():
-#     print(discipline)
+from ui.ui_main import Console
+from service.srv_note import Service_Note
+from service.srv_student import *
+from service.srv_discipline import *
 
+ui = Console(srv_studenti, srv_discipline, srv_note)
+ui.run()
