@@ -14,4 +14,9 @@ class service_student:
         self.__validator.sterge_studenti(id_student, nume)
         self.__repo.sterge_studenti(id_student, nume)
 
-    def
+    def modifica_studenti(self, id_student, nume_nou):
+        self.__validator.modifica_studenti(id_student, nume_nou)
+        self.__repo.modifica_studenti(id_student, nume_nou)
+
+    def cauta_stundent(self, id_student):
+        return self.__validator.cauta_stundent(id_student)
