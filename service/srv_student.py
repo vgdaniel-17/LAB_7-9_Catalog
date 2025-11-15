@@ -1,3 +1,5 @@
+from time import sleep
+
 from domain.studenti import Studenti
 
 class service_student:
@@ -6,3 +8,5 @@ class service_student:
         self.__validator = validator_studenti
 
     def adauga_studenti(self, id_student, nume):
+        self.__validator.adauga_studenti(id_student, nume)
+        self.__repo.adauga_studenti(id_student, nume)
