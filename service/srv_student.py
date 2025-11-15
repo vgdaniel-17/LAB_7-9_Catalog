@@ -1,6 +1,6 @@
 from domain.studenti import Studenti
-from repository.repository_studenti import studenti
 
 class service_student:
-    def __init__(self):
-        self.__disciplina_data = {}
+    def __init__(self, repo_studenti, validator_studenti):
+        self.__repo = repo_studenti
+        self.__validator = validator_studenti
