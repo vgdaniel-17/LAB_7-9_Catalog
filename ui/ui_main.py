@@ -4,19 +4,18 @@ from service import srv_discipline
 
 
 class Console:
-    def __init__(self,srv_studenti, srv_discipline, srv_note):
+    def __init__(self, srv_studenti, srv_discipline, srv_note):
         self.__service_studenti = srv_studenti
         self.__service_materii = srv_discipline
         self.__service_note = srv_note
         self.__comenzi = {
-            "adauga_studenti":self.__ui_adauga_student(),
-            "sterge_studenti":self.__ui.sterge_student(),
-            "modifica_studenti":self.__ui.modifica_student(),
-            "lista_studenti":self.__ui.lista_student(),
-            "lista_discipline":self.__ui.lista_discipline(),
-            "afisare":self.__ui.afisare(),
-            }
-
+            "adauga_studenti": self.__ui_adauga_student(),
+            "sterge_studenti": self.__ui.sterge_student(),
+            "modifica_studenti": self.__ui.modifica_student(),
+            "lista_studenti": self.__ui.lista_student(),
+            "lista_discipline": self.__ui.lista_discipline(),
+            "afisare": self.__ui.afisare(),
+        }
 
     def ui_meniu_principal(self):
         print("----------------------- MENIU PRINCIPAL ------------------------")
@@ -34,7 +33,7 @@ class Console:
 
     def run(self):
         self.ui_meniu_principal()
-        while(True):
+        while (True):
             text_comanda = input(">>>").strip()
             if text_comanda == "":
                 continue
@@ -52,7 +51,7 @@ class Console:
             else:
                 print(f"Comanda {text_comanda} nu exista!")
 
-    def ui_adauga_student(self, parametri_comanda):
+    def __ui_adauga_student(self, parametri_comanda):
         if len(parametri_comanda) != 3:
             raise EroareUI("Ai introdus prea un numar invalid de paramteri. Trebuie 2!")
         try:
@@ -65,7 +64,7 @@ class Console:
 
     def ui_afisare(self):
         return self.__service_studenti.get_all_studenti()
-    
+
 #
 # ui = Console(srv_studenti, srv_discipline, srv_note)
 # ui.run()

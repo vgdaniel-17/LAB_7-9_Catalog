@@ -1,0 +1,2 @@
+class ErrorSS(Exception):
+    pass
