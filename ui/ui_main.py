@@ -20,6 +20,8 @@ class Console:
             #discipline
 
             "add_dis": self.ui_add_dis(),
+            "del_dis": self.ui_del_dis(),
+            "mod_stud": self.ui_mod_stud(),
 
         }
 
@@ -85,7 +87,7 @@ class Console:
             id_student = int(parametri_comanda[0])
         except ValueError:
             raise EroareUI("id numeric invalid!")
-        nume_student = parametri_comanda[1]
+        nume_student = " ".join(parametri_comanda[1:])
         self.__service_student.adauga_student = Student(id_student, nume_student)
         print("Student adaugat cu succes!")
 
@@ -153,11 +155,23 @@ class Console:
             raise EroareUI("id numeric invalid!")
 
         nume = parametri_comanda[1]
-        profesor = parametri_comanda[2]
+        profesor = " ".join(parametri_comanda[2:])
 
         self.__service_student.adauga_disciplina(id_disciplina, nume, profesor)
         print("Disciplina adaugata cu succes!")
 
+    def ui_del_dis(self, parametri_comanda):
+        if len(parametri_comanda) != 1:
+            print("Trebuie doar id-ul!")
+        try:
+            id_disciplina = int(parametri_comanda[0])
+        except ValueError:
+            raise EroareUI("id numeric invalid!")
+        self.__service.sterge_disciplina(id_disciplina)
+
+    def ui_mod_dis(self, parametri_comanda):
+        if len(parametri_comanda) != 3:
+            print("Trebuie doar <id_disciplina> <nota> <prof>!")
 
 
 

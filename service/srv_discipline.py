@@ -17,12 +17,11 @@ class Service_Discipline:
         self.__validator.id(id_disciplina)
         self.__repo.sterge_disciplina(id_disciplina)
 
-    # MOD --------------------------------------------------------------------------------------------------------------
-    def modifica_profesor_disciplina(self, id_disciplina, profesor):
-        #Modifica un profesor de la o disciplina
+    # UPDATE -----------------------------------------------------------------------------------------------------------
+    def modifica_disciplina(self, id_disciplina, nume, profesor):
         self.__validator.profesor(profesor)
         self.__validator.id(id_disciplina)
-        disciplina_nou = self.__repo.cauta(id_disciplina)
+        disciplina_nou = Discipline(id_disciplina, nume, profesor)
         self.__repo.modifica_disciplina(disciplina_nou)
 
     # FIND -------------------------------------------------------------------------------------------------------------
