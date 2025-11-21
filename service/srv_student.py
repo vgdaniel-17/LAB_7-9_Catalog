@@ -13,13 +13,13 @@ class service_student:
 
     def adauga_student(self, id_student, nume):
         self.__validator.validare_student(id_student, nume)
-        self.__repo.adauga_studenti(id_student, nume)
+        self.__repo.adauga_student(id_student, nume)
 
     # DEL --------------------------------------------------------------------------------------------------------------
 
-    def sterge_student(self, id_student, nume):
-        self.__validator.validare_student(id_student, nume)
-        self.__repo.sterge_student(id_student, nume)
+    def sterge_student(self, id_student):
+        self.__validator.validare_id(id_student)
+        self.__repo.sterge_student(id_student)
 
     # UPDATE -----------------------------------------------------------------------------------------------------------
 

@@ -151,10 +151,12 @@ class Console:
             id_disciplina = int(parametri_comanda[0])
         except ValueError:
             raise EroareUI("id numeric invalid!")
-        try:
-            nota = int(parametri_comanda[1])
-        except ValueError:
-            raise EroareUI("nota invalida!")
+
+        nume = parametri_comanda[1]
+        profesor = parametri_comanda[2]
+
+        self.__service_student.adauga_disciplina(id_disciplina, nume, profesor)
+        print("Disciplina adaugata cu succes!")
 
 
 

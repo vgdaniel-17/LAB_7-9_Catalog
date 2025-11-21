@@ -1,0 +1,2 @@
+class ErrorSD(Exception):
+    pass
