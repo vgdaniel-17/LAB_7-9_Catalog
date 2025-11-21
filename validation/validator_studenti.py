@@ -1,4 +1,3 @@
-from domain.studenti import Studenti
 from Error.Srv_stud_error import ErrorSS
 
 class StudentValidator:

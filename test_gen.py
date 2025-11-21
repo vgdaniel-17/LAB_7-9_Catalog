@@ -8,5 +8,5 @@ service = service_student(repo, validator)
 
 service.generare(123)
 
-for s in service.get_all_studenti():
+for s in service.get_all_student():
     print(s)
