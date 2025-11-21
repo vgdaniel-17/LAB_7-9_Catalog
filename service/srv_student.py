@@ -13,16 +13,17 @@ class service_student:
         self.__validator.validare_student(id_student, nume)
         self.__repo.adauga_studenti(id_student, nume)
 
-    def sterge_studenti(self, id_student, nume):
+    def sterge_student(self, id_student, nume):
         self.__validator.validare_student(id_student, nume)
-        self.__repo.sterge_studenti(id_student, nume)
+        self.__repo.sterge_student(id_student, nume)
 
-    def modifica_studenti(self, id_student, nume_nou):
+    def modifica_student(self, id_student, nume_nou):
         self.__validator.validare_student(id_student, nume_nou)
-        self.__repo.modifica_studenti(id_student, nume_nou)
+        self.__repo.modifica_student(id_student, nume_nou)
 
-    def cauta_stundent(self, id_student):
-        return self.__validator.cauta_stundent(id_student)
+    def cauta_student(self, id_student):
+        return self.__validator.cauta_student(id_student)
+
     def generare(self, nr_studenti):
         prenume = ["Nechifor", "Haralambie", "Sergiuț", "Baptist", "Gherasim", "Titus_Liviu", "Ravel", "Codrinel",
                    "Zotic", "Samson", "Sebald", "Geluț", "Ludovic", "Simeonel", "Timoftei", "Prisilia", "Paraschiva",
@@ -41,4 +42,4 @@ class service_student:
 
 
     def get_all_studenti(self):
-        return self.__repo.getAll()
+        return self.__repo.get_all()

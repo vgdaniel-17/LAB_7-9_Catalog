@@ -10,11 +10,11 @@ class Console:
         self.__service_note = srv_note
         self.__comenzi = {
             "adauga_studenti": self.__ui_adauga_student(),
-            "sterge_studenti": self.__ui.sterge_student(),
-            "modifica_studenti": self.__ui.modifica_student(),
-            "lista_studenti": self.__ui.lista_student(),
-            "lista_discipline": self.__ui.lista_discipline(),
-            "afisare": self.__ui.afisare(),
+            "sterge_studenti": self.__ui_sterge_student(),
+            "modifica_studenti": self.__ui_modifica_student(),
+            "lista_studenti": self.__ui_lista_student(),
+            "lista_discipline": self.__ui_lista_discipline(),
+
         }
 
     def ui_meniu_principal(self):
@@ -62,8 +62,12 @@ class Console:
         self.__service_studenti.adauga_studenti = Studenti(id_student, nume_student)
         print("Student adaugat cu succes!")
 
-    def ui_afisare(self):
-        return self.__service_studenti.get_all_studenti()
+    def __ui_sterge_student(self, parm):
+
+
+
+
+
 
 #
 # ui = Console(srv_studenti, srv_discipline, srv_note)

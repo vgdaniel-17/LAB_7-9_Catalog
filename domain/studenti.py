@@ -1,4 +1,4 @@
-class Studenti:
+class Student:
     def __init__(self, id_student, nume_student):
         """
         :param id_student: id student, numar intreg
@@ -9,9 +9,12 @@ class Studenti:
         # self.__nume_student = nume_student
         self.__student_data = {
             "id_student": id_student,
-            "nume_student": nume_student
+            "nume_student": nume_student,
+            "active": True
 
         }
+
+    # GET --------------------------------------------------------------------------------------------------------------
 
     def get_id_student(self):
         return self.__student_data["id_student"]
@@ -19,8 +22,16 @@ class Studenti:
     def get_nume_student(self):
         return self.__student_data["nume_student"]
 
-    def set_nume_student(self, nume_student_nou):
+    def is_active(self):
+        return self.__student_data["active"]
+
+    # SET --------------------------------------------------------------------------------------------------------------
+
+    def set_nume_student(self, id_stundet, nume_student_nou):
         self.__nume_student["nume_student"] = nume_student_nou
+
+    def deactivate(self):
+        self.__student_data["active"] = False
 
     def __str__(self):
         return f"Id: {self.__student_data["id_student"]} -> Nume:{self.__student_data["nume_student"]}"
