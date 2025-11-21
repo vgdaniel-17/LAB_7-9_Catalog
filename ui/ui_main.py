@@ -12,9 +12,14 @@ class Console:
             #studenti
             "add_stud": self.ui_add_stud(), #
             "del_stud": self.ui_del_stud(), #
-            "mod_stud": self.ui_mod_stud(),
-            "list_stud": self.ui_list_stud(),
+            "mod_stud": self.ui_mod_stud(), #
+            "list_stud": self.ui_list_stud(),#
+            "caut_stud": self.ui_caut_stud(),#
+            "gen": self.ui_gen_stud(), #
 
+            #discipline
+
+            "add_dis": self.ui_add_dis(),
 
         }
 
@@ -114,7 +119,45 @@ class Console:
         for s in list_stud:
             print(s)
 
-    def
+    def ui_caut_stud(self, parametri_comanda):
+        if len(parametri_comanda) != 1:
+            print("Trebuie doar id-ul!")
+        try:
+            id_student = int(parametri_comanda[0])
+        except ValueError:
+            raise EroareUI("id numeric invalid!")
+
+        print(self.__service_student.cauta_student(id_student))
+
+
+    def ui_gen_stud(self, parametri_comanda):
+        if len(parametri_comanda) != 1:
+            print("Trebuie doar un numar!")
+        try:
+            numar = int(parametri_comanda[0])
+        except ValueError:
+            raise EroareUI("Nr studenti trebuie sa fie numar!")
+
+        self.__service_student.gen_student(numar)
+        print("Studenti generati cu succes!")
+
+
+    # DISCIPLINE -------------------------------------------------------------------------------------------------------
+
+    def ui_add_dis(self, parametri_comanda):
+        if len(parametri_comanda) != 3:
+            print("Trebuie doar <id_disciplina> <nota> <prof>!")
+        try:
+            id_disciplina = int(parametri_comanda[0])
+        except ValueError:
+            raise EroareUI("id numeric invalid!")
+        try:
+            nota = int(parametri_comanda[1])
+        except ValueError:
+            raise EroareUI("nota invalida!")
+
+
+
 
 
 
