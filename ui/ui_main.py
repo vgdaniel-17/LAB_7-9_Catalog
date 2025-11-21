@@ -1,3 +1,5 @@
+from os import times_result
+
 from Error.UiError import *
 from domain.studenti import Student
 from service import srv_discipline
@@ -21,7 +23,9 @@ class Console:
 
             "add_dis": self.ui_add_dis(),
             "del_dis": self.ui_del_dis(),
-            "mod_stud": self.ui_mod_stud(),
+            "mod_dis": self.ui_mod_stud(),
+            "list_dis": self.ui_list_dis(),
+            "caut_dis": self.ui_caut_dis(),
 
         }
 
@@ -181,8 +185,21 @@ class Console:
         self.__service_discipline.modifica_disciplina(id_disciplina, nume, profesor)
         print("Disciplina modificata!")
 
-    def ui_
+    def ui_list_dis(self):
+        list_dis = self.__service_discipline.get_all()
+        if not list_dis:
+            raise EroareUI("Nu exista discipline!")
+        for d in list_dis:
+            print(d)
 
+    def ui_caut_dis(self, parametri_comanda):
+        if len(parametri_comanda) != 1:
+            print("Trebuie doar id-ul!")
+        try:
+            id_disciplina = int(parametri_comanda[0])
+        except ValueError:
+            raise EroareUI("id numeric invalid!")
+        print(self.__service_discipline.cauta_disciplina(id_disciplina))
 
 
 
