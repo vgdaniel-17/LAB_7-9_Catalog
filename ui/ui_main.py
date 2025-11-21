@@ -6,7 +6,7 @@ from service import srv_discipline
 class Console:
     def __init__(self, srv_studenti, srv_discipline, srv_note):
         self.__service_student = srv_studenti
-        self.__service_materi = srv_discipline
+        self.__service_discipline = srv_discipline
         self.__service_note = srv_note
         self.__comenzi = {
             #studenti
@@ -157,7 +157,7 @@ class Console:
         nume = parametri_comanda[1]
         profesor = " ".join(parametri_comanda[2:])
 
-        self.__service_student.adauga_disciplina(id_disciplina, nume, profesor)
+        self.__service_discipline.adauga_disciplina(id_disciplina, nume, profesor)
         print("Disciplina adaugata cu succes!")
 
     def ui_del_dis(self, parametri_comanda):
@@ -167,12 +167,21 @@ class Console:
             id_disciplina = int(parametri_comanda[0])
         except ValueError:
             raise EroareUI("id numeric invalid!")
-        self.__service.sterge_disciplina(id_disciplina)
+        self.__service_discipline.sterge_disciplina(id_disciplina)
 
     def ui_mod_dis(self, parametri_comanda):
         if len(parametri_comanda) != 3:
             print("Trebuie doar <id_disciplina> <nota> <prof>!")
+        try:
+            id_disciplina = int(parametri_comanda[0])
+        except ValueError:
+            raise EroareUI("id numeric invalid!")
+        nume = parametri_comanda[1]
+        profesor = " ".join(parametri_comanda[2:])
+        self.__service_discipline.modifica_disciplina(id_disciplina, nume, profesor)
+        print("Disciplina modificata!")
 
+    def ui_
 
 
 
