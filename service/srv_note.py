@@ -2,22 +2,43 @@ from domain.note import Note
 
 
 class Service_Note:
-    def __init__(self, repo_note, validator_note, repo_studenti, repo_discipline):
+    def __init__(self, repo_note, repo_studenti, repo_discipline, validator_note):
         self.__repo_note = repo_note
         self.__validator = validator_note
         self.__repo_studenti = repo_studenti
         self.__repo_discipline = repo_discipline
 
+    # ADD --------------------------------------------------------------------------------------------------------------
     def adauga_note(self, id_student, id_diciplina, nota):
-        student = self.__repo_studenti.cauta(id_student)
-        disciplina = self.__repo_discipline.cauta(id_diciplina)
+        """
+        Adauga o nota pe baza unui 'id_studenti' si 'id_diciplina'
+        :param id_student:
+        :param id_diciplina:
+        :param nota:
+        :return:
+        """
 
-        nota = Note(student, disciplina, nota)
-        self.__validator.valideaza(nota)
-        self.__repo_note.adauga_note(nota)
+        _ = self.__repo_studenti.cauta_student(id_student)
+        _ = self.__repo_discipline.cauta(id_diciplina)
 
-    def get_all_note(self):
-        return self.__repo_note.get_all_note()
+        new_nota = Note(id_student, id_diciplina, nota)
+        self.__validator.valideaza_nota(new_nota)
+        self.__repo_note.adauga_note(new_nota)
+
+
+    # LIST NOTE --------------------------------------------------------------------------------------------------------
+
+    def list_note(self, id_student):
+        rezultat = []
+
+        for nota in self.__repo_note.get_all_note():
+            if nota.get_student() == id_student:
+                disciplina = self.__repo_discipline.cauta(nota.get_disciplina())
+                linie = f"Disciplina: {disciplina.get_nume_disciplina()} | Nota: {nota.get_nota()}"
+                rezultat.append(linie)
+        return rezultat
+
+
 
     #Statistica
 

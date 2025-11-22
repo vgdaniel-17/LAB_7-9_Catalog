@@ -13,7 +13,7 @@ class service_student:
 
     def adauga_student(self, id_student, nume):
         self.__validator.validare_student(id_student, nume)
-        self.__repo.adauga_student(id_student, nume)
+        self.__repo.adauga_student(Student(id_student, nume))
 
     # DEL --------------------------------------------------------------------------------------------------------------
 
@@ -26,7 +26,7 @@ class service_student:
     def modifica_student(self, id_student, nume_nou):
         #Modifica student
         self.__validator.validare_student(id_student, nume_nou)
-        student_nou = self.__repo.cauta(id_student)
+        student_nou = self.__repo.cauta_student(id_student)
         student_nou.get_nume_student(nume_nou)
 
     # FIND -------------------------------------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ class service_student:
         :param id_student:
         :return: stundet activ cu 'id' dat
         """
-        return self.__repo.cauta(id_student)
+        return self.__repo.cauta_student(id_student)
 
     # GEN --------------------------------------------------------------------------------------------------------------
 

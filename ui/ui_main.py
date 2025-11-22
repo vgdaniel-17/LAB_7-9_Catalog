@@ -1,8 +1,7 @@
 from os import times_result
 
 from Error.UiError import *
-from domain.studenti import Student
-from service import srv_discipline
+
 
 
 class Console:
@@ -12,24 +11,29 @@ class Console:
         self.__service_note = srv_note
         self.__comenzi = {
             #studenti
-            "add_stud": self.ui_add_stud(), #
-            "del_stud": self.ui_del_stud(), #
-            "mod_stud": self.ui_mod_stud(), #
-            "list_stud": self.ui_list_stud(),#
-            "caut_stud": self.ui_caut_stud(),#
-            "gen": self.ui_gen_stud(), #
+            "add_stud": self.ui_add_stud, #
+            "del_stud": self.ui_del_stud, #
+            "mod_stud": self.ui_mod_stud, #
+            "list_stud": self.ui_list_stud,#
+            "caut_stud": self.ui_caut_stud,#
+            "gen": self.ui_gen_stud, #
 
             #discipline
+            "add_dis": self.ui_add_dis,
+            "del_dis": self.ui_del_dis,
+            "mod_dis": self.ui_mod_dis,
+            "list_dis": self.ui_list_dis,
+            "caut_dis": self.ui_caut_dis,
 
-            "add_dis": self.ui_add_dis(),
-            "del_dis": self.ui_del_dis(),
-            "mod_dis": self.ui_mod_stud(),
-            "list_dis": self.ui_list_dis(),
-            "caut_dis": self.ui_caut_dis(),
+            #note
+            "add_note": self.ui_add_note,
+            "list_note": self.ui_list_note,
 
+
+            "help":self.ui_help,
         }
 
-    def ui_help(self):
+    def ui_help(self, params=None):
         print("""
         =========================== AJUTOR COMENZI ===========================
          Comenzi pentru gestionarea STUDENTILOR:
@@ -39,28 +43,27 @@ class Console:
            list_stud                       - Afiseaza toti studentii activi
            caut_stud <id>                  - Cauta un student dupa ID
            gen <nr>                        - Genereaza automat studenti
-    
+
          Comenzi pentru gestionarea DISCIPLINELOR:
            add_dis <id> <nume> <prof>      - Adauga o disciplina
            del_dis <id>                    - Sterge o disciplina
            mod_dis <id> <nume> <prof>      - Modifica o disciplina
            list_dis                        - Afiseaza toate disciplinele
            caut_dis <id>                   - Cauta o disciplina dupa ID
-    
+
          Comenzi pentru NOTE:
            add_note <id_student> <id_disciplina> <nota>   - Adauga o nota
-           list_note                       - Afiseaza toate notele
-    
+           list_note <id_student> <id_disciplina>         - Afiseaza toate notele
+
          STATISTICI:
            stat1 <id_disciplina>           - Lista studenti + note la disciplina data
            stat2                           - Primii 20% studenti dupa media generala
-    
+
          ALTE COMENZI:
            help                            - Afiseaza acest meniu
            exit                            - Inchide aplicatia
         ======================================================================
         """)
-
 
     def run(self):
         print("Pentru a accesa comenzile <help>")
@@ -85,14 +88,14 @@ class Console:
     # STUDENTI ---------------------------------------------------------------------------------------------------------
 
     def ui_add_stud(self, parametri_comanda):
-        if len(parametri_comanda) != 3:
-            raise EroareUI("Ai introdus prea un numar invalid de paramteri. Trebuie 2!")
+        # if len(parametri_comanda) != 2:
+        #     raise EroareUI("Ai introdus prea un numar invalid de paramteri. Trebuie 2!")
         try:
             id_student = int(parametri_comanda[0])
         except ValueError:
             raise EroareUI("id numeric invalid!")
         nume_student = " ".join(parametri_comanda[1:])
-        self.__service_student.adauga_student = Student(id_student, nume_student)
+        self.__service_student.adauga_student(id_student, nume_student)
         print("Student adaugat cu succes!")
 
     def ui_del_stud(self, parametri_comanda):
@@ -117,8 +120,8 @@ class Console:
         self.__service_student.modifica_student(id_student, nume_student)
         print("Student modificat cu succes!")
 
-    def ui_list_stud(self):
-        list_stud = self.__service_student.get_all()
+    def ui_list_stud(self, parametri_comanda=None):
+        list_stud = self.__service_student.get_all_student()
         if not list_stud:
             raise EroareUI("Nu exista studenti!")
 
@@ -144,7 +147,7 @@ class Console:
         except ValueError:
             raise EroareUI("Nr studenti trebuie sa fie numar!")
 
-        self.__service_student.gen_student(numar)
+        self.__service_student.generare(numar)
         print("Studenti generati cu succes!")
 
 
@@ -185,8 +188,8 @@ class Console:
         self.__service_discipline.modifica_disciplina(id_disciplina, nume, profesor)
         print("Disciplina modificata!")
 
-    def ui_list_dis(self):
-        list_dis = self.__service_discipline.get_all()
+    def ui_list_dis(self, parametri_comanda=None):
+        list_dis = self.__service_discipline.get_all_dis()
         if not list_dis:
             raise EroareUI("Nu exista discipline!")
         for d in list_dis:
@@ -201,6 +204,40 @@ class Console:
             raise EroareUI("id numeric invalid!")
         print(self.__service_discipline.cauta_disciplina(id_disciplina))
 
+    # NOTE -------------------------------------------------------------------------------------------------------------
+
+    def ui_add_note(self, parametri_comanda):
+        if len(parametri_comanda) != 3:
+            print("Trebuie doar <id_student> <id_disciplina> <nota>!")
+        try:
+            id_student = int(parametri_comanda[0])
+        except ValueError:
+            raise EroareUI("id numeric invalid!")
+        try:
+            id_disciplina = int(parametri_comanda[1])
+        except ValueError:
+            raise EroareUI("id numeric invalid!")
+        try:
+            nota = int(parametri_comanda[2])
+        except ValueError:
+            raise EroareUI("nota invalid!")
+        self.__service_note.adauga_note(id_student, id_disciplina, nota)
+        print("Nota adaugata cu succes!")
+
+    def ui_list_note(self, parametri_comanda):
+        if len(parametri_comanda) != 2:
+            print("Trebuie doar <id_student>!")
+        try:
+            id_student = int(parametri_comanda[0])
+        except ValueError:
+            raise EroareUI("id numeric invalid!")
+        afisare = self.__service_note.list_note(id_student)
+
+        if not afisare:
+            print("Nu sunt note!")
+
+        for s in afisare:
+            print(s)
 
 
 

@@ -1,27 +1,38 @@
-from service.srv_student import service_student
-from service.srv_discipline import service_iscipline
-from service.srv_note import ServiceNote
-
 from repository.repository_studenti import RepoStudent
 from repository.repository_discipline import RepoDiscipline
-from repository.repo_note import RepoNote
+from repository.repository_note import RepoNote
 
 from validation.validator_studenti import StudentValidator
 from validation.disciplina_validator import DisciplinaValidator
-from validation.nota_validator import NotaValidator
+from validation.validator_note import NotaValidator
 
-repo_s = RepoStudent()
-repo_d = RepoDiscipline()
-repo_n = RepoNote()
+from service.srv_student import service_student
+from service.srv_discipline import Service_Discipline
+from service.srv_note import Service_Note
 
-val_s = StudentValidator()
-val_d = DisciplinaValidator()
-val_n = NotaValidator()
+from ui.ui_main import Console
 
-srv_studenti = ServiceStudenti(repo_s, val_s)
-srv_discipline = ServiceDiscipline(repo_d, val_d)
-srv_note = ServiceNote(repo_n, repo_s, repo_d, val_n)
 
-# UI
-run_main = Console(srv_studenti, srv_discipline, srv_note)
-run_main.run()
+def main():
+    # ========== REPOSITORIES ==========
+    repo_studenti = RepoStudent()
+    repo_discipline = RepoDiscipline()
+    repo_note = RepoNote()
+
+    # ========== VALIDATORS ==========
+    val_studenti = StudentValidator()
+    val_discipline = DisciplinaValidator()
+    val_note = NotaValidator()
+
+    # ========== SERVICES ==========
+    srv_studenti = service_student(repo_studenti, val_studenti)
+    srv_discipline = Service_Discipline(repo_discipline, val_discipline)
+    srv_note = Service_Note(repo_note, repo_studenti, repo_discipline, val_note)
+
+    # ========== UI ==========
+    consola = Console(srv_studenti, srv_discipline, srv_note)
+    consola.run()
+
+
+if __name__ == "__main__":
+    main()

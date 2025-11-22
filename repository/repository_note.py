@@ -1,9 +1,11 @@
-class Note:
+class RepoNote:
     def __init__(self):
         self.__note = []
 
-    def add_note(self, nota):
+    # ADD --------------------------------------------------------------------------------------------------------------
+    def adauga_note(self, nota):
         self.__note.append(nota)
 
+    # GET --------------------------------------------------------------------------------------------------------------
     def get_all_note(self):
         return self.__note[:]

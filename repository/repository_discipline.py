@@ -29,7 +29,7 @@ class RepoDiscipline:
         :return: -
         """
         for d in self.__discipline:
-            if d.get_id_disciplina() == id_disciplina and d.active:
+            if d.get_id_disciplina() == id_disciplina and d.is_active():
                 d.deactivate()
                 return
         raise RepoError("Disciplina inexistenta sau deja stearsa!")
@@ -56,7 +56,7 @@ class RepoDiscipline:
         :return: disciplina
         """
         for d in self.__discipline:
-            if d.get_id_disciplina() == id_disciplina and d.active:
+            if d.get_id_disciplina() == id_disciplina and d.is_active():
                 return d
         raise RepoError("Disciplina inexistenta sau deja stearsa!")
 
