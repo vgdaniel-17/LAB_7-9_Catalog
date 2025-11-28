@@ -14,22 +14,24 @@ from ui.ui_main import Console
 
 
 def main():
-    # ========== REPOSITORIES ==========
-    repo_studenti = RepoStudent()
+    # FILE ADDRESS
+    cale_student = r"E:\Coding\Python\LC\LAB_7-9\student.txt"
+    # REPOSITORIES
+    repo_studenti = RepoStudent(cale_student)
     repo_discipline = RepoDiscipline()
     repo_note = RepoNote()
 
-    # ========== VALIDATORS ==========
+    # VALIDATORS
     val_studenti = StudentValidator()
     val_discipline = DisciplinaValidator()
     val_note = NotaValidator()
 
-    # ========== SERVICES ==========
+    # SERVICES
     srv_studenti = service_student(repo_studenti, val_studenti)
     srv_discipline = Service_Discipline(repo_discipline, val_discipline)
     srv_note = Service_Note(repo_note, repo_studenti, repo_discipline, val_note)
 
-    # ========== UI ==========
+    # UI
     consola = Console(srv_studenti, srv_discipline, srv_note)
     consola.run()
 

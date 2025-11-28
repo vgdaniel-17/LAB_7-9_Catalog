@@ -11,12 +11,13 @@ class Console:
         self.__service_note = srv_note
         self.__comenzi = {
             #studenti
-            "add_stud": self.ui_add_stud, #
-            "del_stud": self.ui_del_stud, #
-            "mod_stud": self.ui_mod_stud, #
-            "list_stud": self.ui_list_stud,#
-            "caut_stud": self.ui_caut_stud,#
-            "gen_stud": self.ui_gen_stud, #
+            "add_stud": self.ui_add_stud,
+            "del_stud": self.ui_del_stud,
+            "mod_stud": self.ui_mod_stud,
+            "list_stud": self.ui_list_stud,
+            "caut_stud": self.ui_caut_stud,
+            "gen_stud": self.ui_gen_stud,
+            "gol_list_stud": self.ui_gol_lista_stud,
 
             #discipline
             "add_dis": self.ui_add_dis,
@@ -51,6 +52,7 @@ class Console:
            list_stud                       - Afiseaza toti studentii activi
            caut_stud <id>                  - Cauta un student dupa ID
            gen_stud <nr>                   - Genereaza automat studenti
+           gol_list_stud                  - Goleste lista de studenti
 
          Comenzi pentru gestionarea DISCIPLINELOR:
            add_dis <id> <nume> <prof>      - Adauga o disciplina
@@ -131,7 +133,7 @@ class Console:
         print("Student modificat cu succes!")
 
     def ui_list_stud(self, parametri_comanda=None):
-        list_stud = self.__service_student.get_all_student()
+        list_stud = self.__service_student.get_all_student_active()
         if not list_stud:
             raise EroareUI("Nu exista studenti!")
 
@@ -160,6 +162,9 @@ class Console:
         self.__service_student.generare(numar)
         print("Studenti generati cu succes!")
 
+    def ui_gol_lista_stud(self, parametri_comanda):
+        self.__service_student.golire_lista_student()
+        print("Lista de studenti a fost stearsa cu succes!")
 
     # DISCIPLINE -------------------------------------------------------------------------------------------------------
 

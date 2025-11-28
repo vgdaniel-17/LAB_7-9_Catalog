@@ -1,5 +1,6 @@
 import random
 
+from Error.Repo_Error import RepoError
 from domain.studenti import Student
 from repository.repository_studenti import RepoStudent
 
@@ -51,19 +52,31 @@ class service_student:
 
         nume = ["Ciubotariu", "Hagiu", "Bârloagă", "Rânjea", "Moțoc", "Făgărășanu", "Papadopol", "Țicleanu", "Zăgan","Cireșar", "Mălăiescu", "Plopeanu", "Urziceanu", "Popescu", "Ionescu", "Stan", "Dumitru", "Marinescu", "Tudor", "Georgescu", "Barbu", "Pavel", "Savu", "Radu", "Dobre", "Matei", "Toma", "Enache", "Dragan", "Lazar", "Sima", "Moldovan", "Ilie", "Stoica", "Vasile", "Neagu", "Sorescu", "Popa", "Preda", "Luca", "Costache", "Albu", "Moraru", "Nistor", "Mihai", "Lupu", "Sandu", "Parvu", "Munteanu", "Petrescu", "Dinu", "Serban", "Manole", "Oprea", "Rosu", "Davidescu", "Voicu", "Savin", "Baciu", "Diaconu", "Rusu", "Balan", "Cristea", "Avram", "Marcu", "Bejan", "Zaharia", "Nita", "Dinescu", "Constantin", "Sorin", "Jianu", "Movila", "Neacsu", "Badea", "Racovitan", "Carp", "Turcu", "Cojocaru", "Iorga", "Nedelcu", "Suciu", "Olaru", "Tiron", "Chiriac", "Bologa", "Ignat", "Basarab", "Nicolau", "Mazilu", "Rizescu", "Curtis", "Coltea", "Savulet", "Sava", "Oancea", "Anghel", "Zamfir", "Manea", "Gheorghiu", "Barbat", "Roman", "Codreanu", "Neamtu", "Ungureanu", "Costin", "Badeanu", "Tiron", "Varzaru"]
 
-        for _ in range(nr_studenti):
+        count_gen = 0
+        while count_gen <= nr_studenti:
 
             id_student = random.randint(100000, 999999)
             nume_nou = random.choice(nume) + " " + random.choice(prenume)
             student_gen = Student(id_student, nume_nou)
-            self.__repo.adauga_student(student_gen)
+            try:
+                self.__repo.adauga_student(student_gen)
+                count_gen += 1
+            except RepoError:
+                continue
+
 
     # ALL-LIST-ACTIVE --------------------------------------------------------------------------------------------------
 
     def get_all_student_active(self):
         return self.__repo.get_all()
 
-    # ALL-LIST
+    # ALL-LIST ---------------------------------------------------------------------------------------------------------
 
     def get_all_student(self):
         return self.__repo.get_all_all()
+
+    # DEL-LIST ---------------------------------------------------------------------------------------------------------
+
+    def golire_lista_student(self):
+        self.__repo.sterge_tot()
+
