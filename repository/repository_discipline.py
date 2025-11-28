@@ -4,8 +4,44 @@ from Error.Repo_Error import RepoError
 from domain.disciplina import Discipline
 
 class RepoDiscipline:
-    def __init__(self):
-        self.__discipline = []
+    def __init__(self, calea_fiser):
+        self.__discipline = {}
+        self.__calea_fiser = calea_fiser
+        self.__citeste()
+
+
+    # I/O
+
+    def __citeste(self):
+        self.__discipline = {}
+
+        try:
+            with open(self.__calea_fiser, 'r', encoding='utf-8') as fiser:
+                for linie in fiser:
+                    linie = linie.strip()
+                    if linie == '':
+                        continue
+                    parts = linie.split(',')
+                    if len(parts) >= 4:
+                        id_discipline = int(parts[0])
+                        nume = parts[1]
+                        prof = parts[2]
+                        active = parts[3]
+
+                        dis = Discipline(id_discipline, nume, prof)
+
+                        if active == False:
+                            dis.deactivate()
+
+                        self.__discipline[id_discipline] = dis
+        except FileNotFoundError:
+            self.__discipline = {}
+
+    def __scrie(self):
+        with open(self.__calea_fiser, 'w', encoding='utf-8') as fiser:
+            for d in self.__discipline.values():
+                linie = f"{d.id_discipline},{d.nume},{d.profesor},{d.active}\n"
+                fiser.write(linie)
 
 
     # ADD --------------------------------------------------------------------------------------------------------------
