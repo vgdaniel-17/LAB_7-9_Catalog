@@ -1,0 +1,2 @@
+class ErrorSN(Exception):
+    pass

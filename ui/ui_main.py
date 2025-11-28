@@ -16,7 +16,7 @@ class Console:
             "mod_stud": self.ui_mod_stud, #
             "list_stud": self.ui_list_stud,#
             "caut_stud": self.ui_caut_stud,#
-            "gen": self.ui_gen_stud, #
+            "gen_stud": self.ui_gen_stud, #
 
             #discipline
             "add_dis": self.ui_add_dis,
@@ -24,10 +24,18 @@ class Console:
             "mod_dis": self.ui_mod_dis,
             "list_dis": self.ui_list_dis,
             "caut_dis": self.ui_caut_dis,
+            "gen_dis" : self.ui_gen_dis,
 
             #note
             "add_note": self.ui_add_note,
             "list_note": self.ui_list_note,
+            "gen_note": self.ui_gen_note,
+
+            #statistici
+            "stat1": self.ui_stat1,
+            "stat2": self.ui_stat2,
+            "stat3": self.ui_stat3,
+
 
 
             "help":self.ui_help,
@@ -42,7 +50,7 @@ class Console:
            mod_stud <id> <nume_nou>        - Modifica numele unui student
            list_stud                       - Afiseaza toti studentii activi
            caut_stud <id>                  - Cauta un student dupa ID
-           gen <nr>                        - Genereaza automat studenti
+           gen_stud <nr>                   - Genereaza automat studenti
 
          Comenzi pentru gestionarea DISCIPLINELOR:
            add_dis <id> <nume> <prof>      - Adauga o disciplina
@@ -50,14 +58,16 @@ class Console:
            mod_dis <id> <nume> <prof>      - Modifica o disciplina
            list_dis                        - Afiseaza toate disciplinele
            caut_dis <id>                   - Cauta o disciplina dupa ID
+           gen_dis <nr>                    - Genereaza automat discipline
 
          Comenzi pentru NOTE:
            add_note <id_student> <id_disciplina> <nota>   - Adauga o nota
-           list_note <id_student> <id_disciplina>         - Afiseaza toate notele
+           list_note <id_student>          - Afiseaza toate notele unui student
 
          STATISTICI:
            stat1 <id_disciplina>           - Lista studenti + note la disciplina data
            stat2                           - Primii 20% studenti dupa media generala
+           stat3                           - Studenti cu media mai mare decat 5
 
          ALTE COMENZI:
            help                            - Afiseaza acest meniu
@@ -145,7 +155,7 @@ class Console:
         try:
             numar = int(parametri_comanda[0])
         except ValueError:
-            raise EroareUI("Nr studenti trebuie sa fie numar!")
+            raise EroareUI("Nr studenti trebuie sa fie numar pozitiv!")
 
         self.__service_student.generare(numar)
         print("Studenti generati cu succes!")
@@ -204,6 +214,17 @@ class Console:
             raise EroareUI("id numeric invalid!")
         print(self.__service_discipline.cauta_disciplina(id_disciplina))
 
+    def ui_gen_dis(self, parametri_comanda):
+        if len(parametri_comanda) != 1:
+            print("Trebuie doar un numar!")
+        try:
+            numar = int(parametri_comanda[0])
+        except ValueError:
+            raise EroareUI("Nr de discipline trebuie sa fie numar pozitiv!")
+
+        self.__service_discipline.generare(numar)
+        print("Discipline generate cu succes!")
+
     # NOTE -------------------------------------------------------------------------------------------------------------
 
     def ui_add_note(self, parametri_comanda):
@@ -239,6 +260,60 @@ class Console:
         for s in afisare:
             print(s)
 
+    def ui_gen_note(self, parametri_comanda):
+        if len(parametri_comanda) != 1:
+            print("Trebuie doar <nr>!")
+
+        try:
+            numar = int(parametri_comanda[0])
+        except ValueError:
+            raise EroareUI("trebuie numar valid!")
+
+        self.__service_note.generare(numar)
+        print("Nota generata cu succes!")
+
+
+    # STATISTICI -------------------------------------------------------------------------------------------------------
+
+    def ui_stat1(self, parametri_comanda):
+        if len(parametri_comanda) != 1:
+            print("Trebuie doar id-ul disciplinei!")
+        try:
+            id_disciplina = int(parametri_comanda[0])
+        except ValueError:
+            raise EroareUI("id numeric invalid!")
+
+        rez = self.__service_note.sortare_stud_dis(id_disciplina)
+        for s in rez:
+            print(s)
+
+    def ui_stat2(self, params):
+        if len(params) != 0:
+            raise EroareUI("Comanda corecta: stat2")
+
+        rezultat = self.__service_note.statistica_top20()
+
+        if not rezultat:
+            print("Nu exista note in sistem!")
+            return
+
+        print("Top 20% studenti dupa media generala:")
+        for linie in rezultat:
+            print(linie)
+
+    def ui_stat3(self, parametri_comanda):
+        if len(parametri_comanda) != 0:
+            raise EroareUI("Comanda corecta: stat2")
+
+        rezultat = self.__service_note.statistica_top20()
+
+        if not rezultat:
+            print("Nu exista note in sistem!")
+            return
+
+        print("Studenti cu media mai mare decact 5:")
+        for linie in rezultat:
+            print(linie)
 
 
 
