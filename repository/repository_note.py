@@ -1,5 +1,5 @@
 from repository.repository_discipline import RepoDiscipline
-from test_gen import id_student
+
 from domain.note import Note
 
 class RepoNote:
@@ -27,7 +27,7 @@ class RepoNote:
                         nota_cutenta = parts[2]
 
                         note_object = Note(id_student_new, id_disciplina_new, nota_cutenta)
-                        self.__note[id_student] = note_object
+                        self.__note[id_student_new] = note_object
 
         except FileNotFoundError:
             self.__note = {}
@@ -35,7 +35,7 @@ class RepoNote:
     def __scrie(self):
         with open(self.__calea_fiser, "w", encoding="utf-8") as fiser:
             for n in self.__note.values():
-                linie = f"{n.get_student()},{n.get_discipline()},{n.get_nota()}\n"
+                linie = f"{n.get_student()},{n.get_disciplina()},{n.get_nota()}\n"
                 fiser.write(linie)
 
 
@@ -53,3 +53,14 @@ class RepoNote:
     # GET --------------------------------------------------------------------------------------------------------------
     def get_all_note(self):
         return list(self.__note.values())
+
+    # DEL-LIST ---------------------------------------------------------------------------------------------------------
+
+    def sterge_tot(self):
+        self.__citeste()
+
+        for note in self.__note.values():
+            note.deactivate()
+
+        self.__scrie()
+

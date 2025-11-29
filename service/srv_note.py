@@ -68,6 +68,11 @@ class Service_Note:
             self.__validator.valideaza_nota(nota)
             self.__repo_note.adauga_note(nota)
 
+    # DEL-LIST ---------------------------------------------------------------------------------------------------------
+
+    def golire_lista_note(self):
+        self.__repo_note.sterge_tot()
+
     # STATISTICS -------------------------------------------------------------------------------------------------------
 
     def sortare_stud_dis(self, id_disciplina):

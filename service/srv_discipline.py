@@ -51,3 +51,9 @@ class Service_Discipline:
         #Toata lista, inclusiv si cele sterse
         return self.__repo.get_all_all()
 
+    # DEL-LIST ---------------------------------------------------------------------------------------------------------
+
+    def golire_lista_dis(self):
+        self.__repo.sterge_tot()
+
+

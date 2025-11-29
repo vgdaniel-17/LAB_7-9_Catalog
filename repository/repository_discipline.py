@@ -71,6 +71,7 @@ class RepoDiscipline:
 
         if id_disciplina in self.__discipline and self.__discipline[id_disciplina].is_active():
             self.__discipline[id_disciplina].deactivate()
+        self.__scrie()
 
 
     # UPDATE -----------------------------------------------------------------------------------------------------------

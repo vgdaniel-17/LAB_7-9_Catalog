@@ -26,11 +26,13 @@ class Console:
             "list_dis": self.ui_list_dis,
             "caut_dis": self.ui_caut_dis,
             "gen_dis" : self.ui_gen_dis,
+            "gol_list_dis": self.ui_gol_lista_dis,
 
             #note
             "add_note": self.ui_add_note,
             "list_note": self.ui_list_note,
             "gen_note": self.ui_gen_note,
+            "gol_list_note": self.ui_gol_lista_note,
 
             #statistici
             "stat1": self.ui_stat1,
@@ -61,10 +63,13 @@ class Console:
            list_dis                        - Afiseaza toate disciplinele
            caut_dis <id>                   - Cauta o disciplina dupa ID
            gen_dis <nr>                    - Genereaza automat discipline
+           gol_list_dis                    - Goleste lista de discipline
 
          Comenzi pentru NOTE:
            add_note <id_student> <id_disciplina> <nota>   - Adauga o nota
            list_note <id_student>          - Afiseaza toate notele unui student
+           gen_note <nr>                   - Genereaza automat notele 
+           gol_list_note                   - Goleste lista de note
 
          STATISTICI:
            stat1 <id_disciplina>           - Lista studenti + note la disciplina data
@@ -230,6 +235,10 @@ class Console:
         self.__service_discipline.generare(numar)
         print("Discipline generate cu succes!")
 
+    def ui_gol_lista_dis(self, parametri_comanda):
+        self.__service_discipline.golire_lista_dis()
+        print("Lista de discipline a fost stearsa cu succes!")
+
     # NOTE -------------------------------------------------------------------------------------------------------------
 
     def ui_add_note(self, parametri_comanda):
@@ -276,6 +285,10 @@ class Console:
 
         self.__service_note.generare(numar)
         print("Nota generata cu succes!")
+
+    def ui_gol_lista_note(self, parametri_comanda):
+        self.__service_note.golire_lista_note()
+        print("Lista de note a fost stearsa cu succes!")
 
 
     # STATISTICI -------------------------------------------------------------------------------------------------------

@@ -25,8 +25,8 @@ class Student:
 
     # SET --------------------------------------------------------------------------------------------------------------
 
-    def set_nume_student(self, id_stundet, nume_student_nou):
-        self.__nume_student["nume_student"] = nume_student_nou
+    def set_nume_student(self,nume_student_nou):
+        self.__student_data["nume_student"] = nume_student_nou
 
     def deactivate(self):
         self.__student_data["active"] = False

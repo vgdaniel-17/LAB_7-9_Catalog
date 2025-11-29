@@ -15,9 +15,9 @@ from ui.ui_main import Console
 
 def main():
     # FILE ADDRESS
-    cale_student = r"E:\Coding\Python\LC\LAB_7-9\student.txt"
-    cale_disciplina = r"E:\Coding\Python\LC\LAB_7-9\disciplina.txt"
-    cale_note = r"E:\Coding\Python\LC\LAB_7-9\note.txt"
+    cale_student = r"E:\Coding\Python\LC\LAB_7-9\Storage\student.txt"
+    cale_disciplina = r"E:\Coding\Python\LC\LAB_7-9\Storage\disciplina.txt"
+    cale_note = r"E:\Coding\Python\LC\LAB_7-9\Storage\note.txt"
     # REPOSITORIES
     repo_studenti = RepoStudent(cale_student)
     repo_discipline = RepoDiscipline(cale_disciplina)

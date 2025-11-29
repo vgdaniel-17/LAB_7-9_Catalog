@@ -105,7 +105,7 @@ class RepoStudent:
         if not student.is_active():
             raise RepoError("Studentul este sters!")
 
-        student.set_nume_student(student.get_nume_student())
+        student.set_nume_student(student_nou.get_nume_student())
         self.__scrie()
 
     # FIND -------------------------------------------------------------------------------------------------------------
@@ -139,7 +139,7 @@ class RepoStudent:
         self.__citeste()
         return list(self.__studenti.values())
 
-    # DEL-LIST
+    # DEL-LIST ---------------------------------------------------------------------------------------------------------
 
     def sterge_tot(self):
         self.__citeste()

@@ -28,7 +28,8 @@ class service_student:
         #Modifica student
         self.__validator.validare_student(id_student, nume_nou)
         student_nou = self.__repo.cauta_student(id_student)
-        student_nou.get_nume_student(nume_nou)
+        student_nou.set_nume_student(nume_nou)
+        self.__repo.modifica_student(student_nou)
 
     # FIND -------------------------------------------------------------------------------------------------------------
     def cauta_student(self, id_student):

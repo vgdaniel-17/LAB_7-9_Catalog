@@ -31,7 +31,7 @@ class Discipline:
     # SET --------------------------------------------------------------------------------------------------------------
 
     def set_nume_disciplina(self, nume_disciplina_nou):
-        self.nume_disciplina["nume_disciplina"] = nume_disciplina_nou
+        self.__disciplina_data["nume_disciplina"] = nume_disciplina_nou
 
     def set_profesor(self, profesor_nou):
         self.__disciplina_data['profesor'] = profesor_nou
