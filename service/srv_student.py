@@ -54,7 +54,7 @@ class service_student:
         nume = ["Ciubotariu", "Hagiu", "Bârloagă", "Rânjea", "Moțoc", "Făgărășanu", "Papadopol", "Țicleanu", "Zăgan","Cireșar", "Mălăiescu", "Plopeanu", "Urziceanu", "Popescu", "Ionescu", "Stan", "Dumitru", "Marinescu", "Tudor", "Georgescu", "Barbu", "Pavel", "Savu", "Radu", "Dobre", "Matei", "Toma", "Enache", "Dragan", "Lazar", "Sima", "Moldovan", "Ilie", "Stoica", "Vasile", "Neagu", "Sorescu", "Popa", "Preda", "Luca", "Costache", "Albu", "Moraru", "Nistor", "Mihai", "Lupu", "Sandu", "Parvu", "Munteanu", "Petrescu", "Dinu", "Serban", "Manole", "Oprea", "Rosu", "Davidescu", "Voicu", "Savin", "Baciu", "Diaconu", "Rusu", "Balan", "Cristea", "Avram", "Marcu", "Bejan", "Zaharia", "Nita", "Dinescu", "Constantin", "Sorin", "Jianu", "Movila", "Neacsu", "Badea", "Racovitan", "Carp", "Turcu", "Cojocaru", "Iorga", "Nedelcu", "Suciu", "Olaru", "Tiron", "Chiriac", "Bologa", "Ignat", "Basarab", "Nicolau", "Mazilu", "Rizescu", "Curtis", "Coltea", "Savulet", "Sava", "Oancea", "Anghel", "Zamfir", "Manea", "Gheorghiu", "Barbat", "Roman", "Codreanu", "Neamtu", "Ungureanu", "Costin", "Badeanu", "Tiron", "Varzaru"]
 
         count_gen = 0
-        while count_gen <= nr_studenti:
+        while count_gen < nr_studenti:
 
             id_student = random.randint(100000, 999999)
             nume_nou = random.choice(nume) + " " + random.choice(prenume)
