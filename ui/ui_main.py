@@ -52,7 +52,7 @@ class Console:
            list_stud                       - Afiseaza toti studentii activi
            caut_stud <id>                  - Cauta un student dupa ID
            gen_stud <nr>                   - Genereaza automat studenti
-           gol_list_stud                  - Goleste lista de studenti
+           gol_list_stud                   - Goleste lista de studenti
 
          Comenzi pentru gestionarea DISCIPLINELOR:
            add_dis <id> <nume> <prof>      - Adauga o disciplina

@@ -26,8 +26,8 @@ class Service_Discipline:
         self.__repo.modifica_disciplina(disciplina_nou)
 
     # FIND -------------------------------------------------------------------------------------------------------------
-    def cauta_profesor_disciplina(self, id_disciplina):
-        self.__validator.disciplina(id_disciplina)
+    def cauta_disciplina(self, id_disciplina):
+        self.__validator.id(id_disciplina)
         return self.__repo.cauta(id_disciplina)
 
     # GEN --------------------------------------------------------------------------------------------------------------
