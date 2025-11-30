@@ -19,7 +19,7 @@ class Discipline:
     def get_id_disciplina(self):
         return self.__disciplina_data["id_disciplina"]
 
-    def get_nume_disciplina(self):
+    def get_nume_disciplina(self) -> str:
         return self.__disciplina_data["nume_disciplina"]
 
     def get_profesor(self):

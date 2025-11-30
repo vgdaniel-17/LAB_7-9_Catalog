@@ -1,4 +1,5 @@
-from service.srv_student import service_student
+from service.srv_discipline import Service_Discipline
+from domain.disciplina import Discipline
 import unittest
 
 # Copie fake pentru repo
@@ -48,7 +49,68 @@ class ValidatorDisciplineMock:
         if not prof: raise Exception("Profesor vid")
 
 class RepoDisciplineTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        print("Incep testele pentru service.studenti")
+
+    @classmethod
+    def tearDownClass(cls):
+        print("Teste: OK!")
+
+
     def setUp(self):
         self.repo = RepoDisciplineMock()
         self.validator = ValidatorDisciplineMock()
-        self.service = service_student(self.repo, self.validator)
+        self.service = Service_Discipline(self.repo, self.validator)
+
+    def test_adauga_disciplina(self):
+        self.service.adauga_disciplina(123, "Mate", "Gabi")
+        lista = self.service.get_all_dis()
+
+        self.assertEqual(len(lista), 1)
+        self.assertEqual(lista[0].get_nume_disciplina(), "Mate")
+        self.assertEqual(lista[0].get_id_disciplina(), 123)
+        self.assertEqual(lista[0].get_profesor(), "Gabi")
+        with self.assertRaises(Exception):
+            self.service.adauga_disciplina(123, "Altceva", "Z")
+
+    def test_sterge_disciplina(self):
+        self.service.adauga_disciplina(123, "Mate", "Gabi")
+        self.assertEqual(len(self.service.get_all_dis()), 1)
+
+        self.service.sterge_disciplina(123)
+
+        self.assertEqual(len(self.service.get_all_dis()), 0)
+
+        with self.assertRaises(Exception):
+            self.service.sterge_disciplina(123)
+
+    def test_modifica_disciplina(self):
+        self.service.adauga_disciplina(123, "Mate", "Gabi")
+        self.assertEqual(len(self.service.get_all_dis()), 1)
+        self.service.modifica_disciplina(123, "Info", "Jhon")
+        dis = self.service.get_all_dis()[0]
+        self.assertEqual(dis.get_nume_disciplina(), "Info")
+        self.assertEqual(dis.get_profesor(), "Jhon")
+
+    def test_cauta(self):
+        self.service.adauga_disciplina(123, "Mate", "Gabi")
+        dis = self.service.cauta_disciplina(123)
+        self.assertEqual(dis.get_nume_disciplina(), "Mate")
+        self.assertEqual(dis.get_profesor(), "Gabi")
+
+    def test_generare(self):
+        nr = 5
+        self.service.generare(nr)
+        self.assertEqual(len(self.service.get_all_dis()), nr)
+
+    def test_golire_lista_dis(self):
+        self.service.generare(10)
+        self.assertEqual(len(self.service.get_all_dis()), 10)
+        self.service.golire_lista_dis()
+        self.assertEqual(len(self.service.get_all_dis()), 0)
+
+
+
+
+
