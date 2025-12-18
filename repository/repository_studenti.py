@@ -1,3 +1,4 @@
+
 from Error.Repo_Error import RepoError
 from domain.studenti import Student
 
@@ -120,12 +121,27 @@ class RepoStudent:
 
         self.__citeste()
 
-        if id_student in self.__studenti:
-            stu = self.__studenti[id_student]
-            if stu.is_active():
-                return stu
+        lista_curenta = list(self.__studenti.values())
+        return self.__cauta_rec(lista_curenta, id_student)
 
-        raise RepoError("Student nu exista sau este sters!")
+
+    def __cauta_rec(self, id_student, lista):
+
+        if not lista:
+            raise RepoError("Student nu exista sau este sters!")
+
+        student_curent = lista[0]
+
+
+        if student_curent.get_id_student() == id_student:
+            if student_curent.is_active():
+                return student_curent
+            else:
+                raise RepoError("Student nu exista sau este sters!")
+
+        return self.__cauta_rec(id_student, lista[1: ])
+
+
 
     # ALL-LIST-ACTIVE --------------------------------------------------------------------------------------------------
 

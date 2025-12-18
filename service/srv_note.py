@@ -31,6 +31,14 @@ class Service_Note:
     # LIST NOTE --------------------------------------------------------------------------------------------------------
 
     def list_note(self, id_student):
+        """
+        N - Numarul total al notelor din repo
+        Interatia for parcurge toate notele
+        Deoarece timpul de executie creste direct proportional cu numarul notelor (N), avem o complex. liniara
+        Complexitatea timp: O(N)
+        :param id_student: numar intreg, pozitiv
+        :return: rezultat
+        """
         rezultat = []
 
         for nota in self.__repo_note.get_all_note():
@@ -136,7 +144,6 @@ class Service_Note:
 
 
     def lista_stud_med_mai_mare_5(self):
-        def statistica_top20(self):
 
             note_student = {}
 
