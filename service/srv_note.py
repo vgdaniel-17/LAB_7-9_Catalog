@@ -165,3 +165,17 @@ class Service_Note:
             return [f"{nume} | Media: {round(media, 2)}" for nume, media in medii]
 
 
+    def sortare(self):
+        rez = []
+        for note in self.__repo_note.get_all_note():
+
+
+            id_stud = note.get_student()
+            dis = note.get_disciplina()
+            valoare = note.get_nota()
+
+            rez.append((id_stud, dis, valoare))
+
+        rez.sort(key = lambda x : (x[0].lower(), x[1].lower()))
+
+        return rez

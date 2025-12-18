@@ -1,7 +1,7 @@
-import random
-
 from Error.Repo_Error import RepoError
 from domain.studenti import Student
+import random
+from random import randint
 from repository.repository_studenti import RepoStudent
 
 
@@ -80,4 +80,5 @@ class service_student:
 
     def golire_lista_student(self):
         self.__repo.sterge_tot()
+
 

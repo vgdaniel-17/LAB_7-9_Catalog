@@ -33,6 +33,7 @@ class Console:
             "list_note": self.ui_list_note,
             "gen_note": self.ui_gen_note,
             "gol_list_note": self.ui_gol_lista_note,
+            "sort": self.sortare,
 
             #statistici
             "stat1": self.ui_stat1,
@@ -70,6 +71,7 @@ class Console:
            list_note <id_student>          - Afiseaza toate notele unui student
            gen_note <nr>                   - Genereaza automat notele 
            gol_list_note                   - Goleste lista de note
+           sort                            - sort
 
          STATISTICI:
            stat1 <id_disciplina>           - Lista studenti + note la disciplina data
@@ -290,6 +292,10 @@ class Console:
         self.__service_note.golire_lista_note()
         print("Lista de note a fost stearsa cu succes!")
 
+    def sortare(self, parametri_comanda):
+        data = self.__service_note.sortare()
+        for d in data:
+            print(d)
 
     # STATISTICI -------------------------------------------------------------------------------------------------------
 
